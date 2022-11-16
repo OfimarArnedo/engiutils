@@ -22,21 +22,21 @@ class Filter {
          };
          break;
       case 'M':
-         Pattern pattern = Pattern.compile(this.escape(this.match));
-         Matcher matcher = pattern.matcher("");
-         this.comparator = new FilterComparator(matcher) {
-             private final Matcher m;
+          Pattern pattern = Pattern.compile(this.escape(this.match));
+          final Matcher matcher = pattern.matcher("");
+          this.comparator = new FilterComparator(){
+              private final Matcher m;
+              {
+                  this.m = matcher;
+              }
 
-             {
-                this.m = var2;
-             }
-
-//             public boolean match(String content) {
-//                this.m.reset(content);
-//                return this.m.matches();
-//             }
+              public boolean match(String content) {
+                  this.m.reset(content);
+                  return this.m.matches();
+              }
           };
-         break;
+          break;
+      
       case 'N':
          this.comparator = new FilterComparator() {
             public boolean match(String content) {
